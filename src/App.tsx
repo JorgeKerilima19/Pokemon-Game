@@ -1,5 +1,7 @@
+import MapCanvas from "./MapCanvas";
+
 function App() {
-  return <h1>Project Started</h1>;
+  return <MapCanvas />;
 }
 
 export default App;
