@@ -15,6 +15,7 @@ interface PokemonType {
 interface Evolution {
   id: number;
   name: string;
+  url: string;
 }
 
 interface Move {
@@ -46,6 +47,8 @@ interface Pokemon {
   location: string;
   items?: Item;
   hability: Hability;
-  Evolution: Evolution;
+  Evolution: Evolution | "Unique";
   EvolutionForms?: Evolution[];
+  is_Legendary: boolean;
+  is_Mythical: boolean;
 }
