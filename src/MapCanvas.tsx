@@ -27,7 +27,9 @@ const MapCanvas: React.FC = () => {
     }
   };
 
-  draw();
+  useEffect(() => {
+    draw();
+  }, []);
 
   return <canvas ref={canvasRef} width={800} height={600} />;
 };
