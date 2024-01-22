@@ -1,7 +1,6 @@
-import Sprites from "./Sprites";
 import Vectors from "./Vector";
 
-class Resource {
+export default class DrawSprite {
   sprite: { img: HTMLImageElement; isLoaded: boolean };
   framesize: Vectors;
   Hframes: number;
@@ -9,7 +8,7 @@ class Resource {
   frame: number;
   frameMap: Map<number, Vectors>;
   scale: number;
-  position: { x: number; y: number };
+  position: Vectors;
 
   constructor({
     sprite,
@@ -35,7 +34,7 @@ class Resource {
     this.frame = frame ?? 0;
     this.frameMap = new Map<number, Vectors>();
     this.scale = scale ?? 1;
-    this.position = position || { x: 0, y: 0 };
+    this.position = position || new Vectors(0, 0);
     this.buildFrame();
   }
 
@@ -46,24 +45,21 @@ class Resource {
       for (let h = 0; h < this.Hframes; h++) {
         this.frameMap.set(
           frameCount,
-          new Vectors(this.framesize.x * v, this.framesize.y * h)
+          new Vectors(this.framesize.x * h, this.framesize.y * v)
         );
         frameCount++;
       }
     }
   }
 
-  drawCharacter(ctx: CanvasRenderingContext2D, x: number, y: number) {
-    if (!this.sprite.isLoaded) {
-      return;
-    }
+  drawImage(ctx: CanvasRenderingContext2D, x: number, y: number) {
     let frameCoordX = 0;
     let frameCoordY = 0;
     const frame = this.frameMap.get(this.frame);
 
     if (frame) {
       frameCoordX = frame.x;
-      frameCoordX = frame.y;
+      frameCoordY = frame.y;
     }
 
     const frameSizeX = this.framesize.x;
@@ -74,7 +70,7 @@ class Resource {
       frameCoordX,
       frameCoordY,
       frameSizeX,
-      frameCoordY,
+      frameSizeY,
       x,
       y,
       frameSizeX * this.scale,
@@ -82,13 +78,3 @@ class Resource {
     );
   }
 }
-
-const SpriteCharacter = new Resource({
-  sprite: Sprites.images.hero,
-  framesize: new Vectors(16, 16),
-  Hframes: 3,
-  Vframes: 8,
-  frame: 1,
-});
-
-export default SpriteCharacter;

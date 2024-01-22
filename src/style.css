@@ -13,6 +13,6 @@ body {
 
 canvas{
   background-color: brown;
-  width: 40rem;
-  height: 70vh;
+  width: 50rem;
+  height: auto;
 }
