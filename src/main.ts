@@ -1,3 +1,5 @@
+import GameLoop from "./classes/Gameloop";
+
 import Sprites from "./classes/Sprites";
 import DrawSprite from "./classes/DrawSprite";
 import Vectors from "./classes/Vector";
@@ -49,9 +51,12 @@ const draw = () => {
   }
 };
 
-setInterval(() => {
+const update = () => {
   hero.frame += 1;
-  draw();
-}, 300);
+};
+
+const game = new GameLoop(update, draw);
+
+game.start();
 
 root?.appendChild(canvas);
