@@ -4,6 +4,8 @@ import Sprites from "./classes/Sprites";
 import DrawSprite from "./classes/DrawSprite";
 import Vectors from "./classes/Vector";
 
+import InputMove, { DOWN, LEFT, RIGHT, UP } from "./classes/InputMove";
+
 const root = document.getElementById("root");
 
 const canvas = document.createElement("canvas");
@@ -34,6 +36,7 @@ const hero = new DrawSprite({
 });
 
 const heroPos = new Vectors(16 * 5, 16 * 5);
+const inputMove = new InputMove();
 
 const draw = () => {
   //Hero On grid
@@ -52,7 +55,18 @@ const draw = () => {
 };
 
 const update = () => {
-  hero.frame += 1;
+  if (inputMove.direction === UP) {
+    heroPos.y -= 1;
+  }
+  if (inputMove.direction === DOWN) {
+    heroPos.y += 1;
+  }
+  if (inputMove.direction === LEFT) {
+    heroPos.x -= 1;
+  }
+  if (inputMove.direction === RIGHT) {
+    heroPos.x += 1;
+  }
 };
 
 const game = new GameLoop(update, draw);
