@@ -5,6 +5,7 @@ import DrawSprite from "./classes/DrawSprite";
 import Vectors from "./classes/Vector";
 
 import InputMove, { DOWN, LEFT, RIGHT, UP } from "./classes/InputMove";
+import { gridCell } from "./helpers/grid";
 
 const root = document.getElementById("root");
 
@@ -33,17 +34,17 @@ const hero = new DrawSprite({
   Hframes: 3,
   Vframes: 8,
   frame: 1,
+  position: new Vectors(gridCell(6), gridCell(5)),
 });
 
-const heroPos = new Vectors(16 * 5, 16 * 5);
 const inputMove = new InputMove();
 
 const draw = () => {
   //Hero On grid
 
   const heroOffset = new Vectors(8, -21);
-  const heroPostX = heroPos.x + heroOffset.x;
-  const heroPostY = heroPos.y + heroOffset.y;
+  const heroPostX = hero.position.x + heroOffset.x;
+  const heroPostY = hero.position.y + heroOffset.y;
 
   if (ctx) {
     skySprite.drawImage(ctx, 0, 0);
@@ -56,19 +57,19 @@ const draw = () => {
 
 const update = () => {
   if (inputMove.direction === UP) {
-    heroPos.y -= 1;
+    hero.position.y -= 1;
     hero.frame = 6;
   }
   if (inputMove.direction === DOWN) {
-    heroPos.y += 1;
+    hero.position.y += 1;
     hero.frame = 0;
   }
   if (inputMove.direction === LEFT) {
-    heroPos.x -= 1;
+    hero.position.x -= 1;
     hero.frame = 9;
   }
   if (inputMove.direction === RIGHT) {
-    heroPos.x += 1;
+    hero.position.x += 1;
     hero.frame = 3;
   }
 };
