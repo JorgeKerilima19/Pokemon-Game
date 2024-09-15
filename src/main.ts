@@ -57,15 +57,19 @@ const draw = () => {
 const update = () => {
   if (inputMove.direction === UP) {
     heroPos.y -= 1;
+    hero.frame = 6;
   }
   if (inputMove.direction === DOWN) {
     heroPos.y += 1;
+    hero.frame = 0;
   }
   if (inputMove.direction === LEFT) {
     heroPos.x -= 1;
+    hero.frame = 9;
   }
   if (inputMove.direction === RIGHT) {
     heroPos.x += 1;
+    hero.frame = 3;
   }
 };
 
